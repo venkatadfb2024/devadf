@@ -1,0 +1,24 @@
+{
+	"name": "PL_Parent",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 40
+				}
+			}
+		],
+		"parameters": {
+			"Parentname": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-04-24T15:18:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

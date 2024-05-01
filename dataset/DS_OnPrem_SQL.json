@@ -1,0 +1,17 @@
+{
+	"name": "DS_OnPrem_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_OnPrem_Sql_Server",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "HumanResources",
+			"table": "venkat"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

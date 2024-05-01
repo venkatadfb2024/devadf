@@ -1,0 +1,23 @@
+{
+	"name": "LS_ADLS_gen2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://adlsgen2april17.dfs.core.windows.net/",
+			"tenant": "1283f659-f072-46da-9ac4-2552170ec82a",
+			"servicePrincipalId": "83887325-624f-49a1-8f9c-1cd010384333",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"servicePrincipalCredential": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_Azure_Key_Vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SPN",
+				"secretVersion": "26e74eb5f8af428ab0ef9b4dfc147ad1"
+			}
+		}
+	}
+}

@@ -1,0 +1,31 @@
+{
+	"name": "DS_OnPrem_SQL_Generic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_OnPrem_Sql_Server",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"OnPremTableName": {
+				"type": "string"
+			},
+			"schema": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().OnPremTableName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

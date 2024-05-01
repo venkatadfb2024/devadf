@@ -1,0 +1,21 @@
+{
+	"name": "DS_Sql_OnPrem_Gen",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_OnPrem_Sql_Server",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"OnPremTName": {
+				"type": "string"
+			},
+			"Schema": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

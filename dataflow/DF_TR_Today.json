@@ -1,0 +1,108 @@
+{
+	"name": "DF_TR_Today",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_Blob_CSV_DataFlow_generic",
+						"type": "DatasetReference"
+					},
+					"name": "MaterialData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Azure_SQL_DB_Generic",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_Azure_SQL_DB_Generic",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Part_ID as integer,",
+				"          Part_name as string,",
+				"          MRP as short,",
+				"          Price as short,",
+				"          Division as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> MaterialData",
+				"MaterialData split(Division=='22',",
+				"     Division!='22',",
+				"     disjoint: true) ~> split1@(Division22, OthersThan22, Others)",
+				"split1@Division22 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ID as integer,",
+				"          Part_Id as string,",
+				"          PartName as string,",
+				"          MRP as string,",
+				"          Price as string,",
+				"          Plant as string,",
+				"          Active as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Part_ID,",
+				"          Part_name,",
+				"          MRP,",
+				"          Price,",
+				"          Division",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1",
+				"split1@OthersThan22 sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     input(",
+				"          ID as integer,",
+				"          Part_Id as string,",
+				"          PartName as string,",
+				"          MRP as string,",
+				"          Price as string,",
+				"          Plant as string,",
+				"          Active as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Part_ID,",
+				"          Part_name,",
+				"          MRP,",
+				"          Price,",
+				"          Division",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink2"
+			]
+		}
+	}
+}

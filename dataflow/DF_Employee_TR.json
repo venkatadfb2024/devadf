@@ -1,0 +1,70 @@
+{
+	"name": "DF_Employee_TR",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_Blob_CSV_DataFlow_generic",
+						"type": "DatasetReference"
+					},
+					"name": "Emp"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Blob_CSV_Genreic",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "addnewcolumn"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp_id as short,",
+				"          emp_name as string,",
+				"          emp_sal as short,",
+				"          emp_departID as string,",
+				"          emp_location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     limit: 50,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> Emp",
+				"Emp derive(empvariablePay = emp_sal*10/100,",
+				"     partitionBy('hash', 1)) ~> addnewcolumn",
+				"addnewcolumn select(mapColumn(",
+				"          EmpID = emp_id,",
+				"          EmpName = emp_name,",
+				"          EmpSal = emp_sal,",
+				"          emp_departID,",
+				"          empvariablePay",
+				"     ),",
+				"     partitionBy('hash', 1),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 aggregate(groupBy(emp_departID),",
+				"     SumSalary = sum(EmpSal),",
+				"     partitionBy('hash', 1)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

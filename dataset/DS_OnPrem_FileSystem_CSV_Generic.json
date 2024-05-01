@@ -1,0 +1,31 @@
+{
+	"name": "DS_OnPrem_FileSystem_CSV_Generic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_OnPrem_FileSystem",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FilteredFileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": {
+					"value": "@dataset().FilteredFileName",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
