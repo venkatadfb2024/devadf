@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfApril08"
+		},
+		"LS_Azure_SQL_DB_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=azuresqlserverapril12.database.windows.net;Initial Catalog=azuresqldbapril12;User ID=dbadmin"
+		},
+		"LS_BlobStorage_connectionString": {
+			"value": ""
+		},
+		"LS_OnPrem_FileSystem_password": {
+			"value": ""
+		},
+		"LS_OnPrem_Sql_Server_connectionString": {
+			"value": "Integrated Security=True;Data Source=US-PF2N8JB0\\SQLEXPRESS;Initial Catalog=AdventureWorks2012"
+		},
+		"LS_OnPrem_Sql_Server_password": {
+			"value": ""
+		},
+		"LS_ADLS_gen2_properties_typeProperties_url": {
+			"value": "https://adlsgen2april17.dfs.core.windows.net/"
+		},
+		"LS_ADLS_gen2_properties_typeProperties_tenant": {
+			"value": "1283f659-f072-46da-9ac4-2552170ec82a"
+		},
+		"LS_ADLS_gen2_properties_typeProperties_servicePrincipalId": {
+			"value": "83887325-624f-49a1-8f9c-1cd010384333"
+		},
+		"LS_Azure_Key_Vault_properties_typeProperties_baseUrl": {
+			"value": "https://akvapril12.vault.azure.net/"
+		},
+		"LS_OnPrem_FileSystem_properties_typeProperties_host": {
+			"value": "C:\\Finance"
+		},
+		"LS_OnPrem_FileSystem_properties_typeProperties_userId": {
+			"value": "EAD\\vravala2"
+		},
+		"LS_OnPrem_Sql_Server_properties_typeProperties_userName": {
+			"value": "EAD\\vravala2"
+		}
+	}
+}
